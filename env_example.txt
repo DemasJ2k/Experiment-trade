@@ -1,0 +1,22 @@
+ENVIRONMENT VARIABLES TEMPLATE
+Fill in your values, then save this file as ".env" in the project root.
+
+# --- Market data (your data-fetching API) ---
+MARKET_DATA_API_KEY=
+MARKET_DATA_BASE_URL=
+
+# --- News + economic calendar ---
+FINNHUB_API_KEY=
+# Optional secondary news-sentiment source
+ALPHA_VANTAGE_API_KEY=
+
+# --- Agent brain + critic pass ---
+ANTHROPIC_API_KEY=
+
+# --- Storage / state / immutable audit log ---
+SUPABASE_URL=
+SUPABASE_KEY=
+
+# --- Runtime ---
+# 'backtest' for Phase 1, 'paper' for Phase 2. NEVER 'live'.
+RUN_MODE=backtest
