@@ -1,0 +1,35 @@
+# Secrets — NEVER commit
+.env
+*.env
+!env_example.txt
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ipynb_checkpoints/
+
+# Local config (copied from example; may contain frozen choices but no secrets)
+# Tracked intentionally? Keep the example tracked; ignore the live copy to avoid
+# accidental secret leakage if anyone inlines keys.
+config/experiment.yaml
+
+# Data artifacts (re-ingestable; not source)
+data/store/
+*.parquet
+*.duckdb
+*.sqlite
+*.db
+
+# Reports / plots
+reports/
+*.png
+!docs/**/*.png
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
