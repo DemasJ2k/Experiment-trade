@@ -9,6 +9,7 @@ requests
 
 # Data / news
 finnhub-python
+pyarrow           # parquet candle store
 
 # Storage
 supabase

@@ -18,10 +18,34 @@ source .venv/bin/activate        # Windows: .venv\Scripts\activate
 # 2. Install dependencies
 pip install -r requirements.txt
 
-# 3. Configure secrets and parameters
-cp .env.example .env                              # then fill in your keys
-cp config/experiment.example.yaml config/experiment.yaml
+# 3. Configure secrets (config/experiment.yaml is version-controlled — the contract)
+cp env_example.txt .env          # then fill in your keys (paper/demo only)
 ```
+
+The exact clean-environment recipe is also recorded as the `/bootstrap-env` project
+skill, and a `SessionStart` hook (`.claude/hooks/session-start.sh`) reproduces it
+automatically in Claude Code on the web.
+
+## Run Phase 1
+
+```bash
+python -m pytest                       # full suite (incl. the no-look-ahead tests)
+python -m scripts.demo_walkforward     # walk-forward report on SYNTHETIC data (DoD demo)
+
+# Real data (needs MARKET_DATA_API_KEY + FINNHUB_API_KEY in .env):
+python -m data.ingest_candles          # Twelve Data: XAU/USD + US30, H1/H4/Daily
+python -m data.ingest_news             # Finnhub news/sentiment + curated FOMC/CPI/NFP
+```
+
+### Phase-1 layout (built)
+
+- `config/loader.py` — strict config loader (fail-loud) + fail-closed secret access.
+- `data/` — provider-abstracted candle ingest (`providers/`), parquet store, Finnhub
+  news, and the curated economic-calendar blackout source.
+- `backtest/` — event-driven `engine.py` (closed candles, costs, no look-ahead),
+  `walk_forward.py` (rolling IS/OOS + embargo), `metrics.py` (Sortino, WFE, Deflated
+  Sharpe).
+- `tests/test_no_lookahead.py` — proves the engine cannot see the forming/future bar.
 
 ## What goes where
 

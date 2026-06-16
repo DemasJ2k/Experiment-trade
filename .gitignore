@@ -12,10 +12,8 @@ __pycache__/
 .pytest_cache/
 .ipynb_checkpoints/
 
-# Local config (copied from example; may contain frozen choices but no secrets)
-# Tracked intentionally? Keep the example tracked; ignore the live copy to avoid
-# accidental secret leakage if anyone inlines keys.
-config/experiment.yaml
+# config/experiment.yaml is the pre-registered CONTRACT — version-controlled and
+# frozen. Secrets never go here; they live in .env (git-ignored above).
 
 # Data artifacts (re-ingestable; not source)
 data/store/
