@@ -1,0 +1,50 @@
+# All locked experiment parameters. Copy to config/experiment.yaml and tune defaults marked (default).
+
+account:
+  paper_balance_usd: 50000
+  risk_per_trade_pct: 0.5        # allowed range 0.5–1.0
+
+sample:
+  verdict_trades: 100            # binding verdict
+  interim_trades: 50             # suggestive only
+
+reward:
+  base_ratio: 2.0
+  high_confidence_ratio: 3.0
+  high_confidence_unlocked: false   # flips true ONLY after confidence is proven calibrated
+
+validation:
+  walk_forward_efficiency_min: 0.5
+  embargo_days: 30
+  in_sample_min_trades: 100
+
+benchmark:
+  type: buy_and_hold_gold_plus_risk_free
+
+profitability:                   # ALL must hold, out-of-sample, after costs
+  require_beats_benchmark: true
+  sortino_min: 1.0
+  require_statistical_significance: true
+  multiple_testing_correction: deflated_sharpe   # or 'bonferroni'
+
+stretch_metric:
+  weekly_return_pct_range: [2, 3]   # LOGGED ONLY — not pass/fail
+
+safety:                          # (default) values — tune as needed
+  daily_loss_breaker_pct: 3
+  max_drawdown_breaker_pct: 10
+  max_open_positions: 1
+  calendar_blackout_events: [FOMC, CPI, NFP]
+  max_api_calls_per_cycle: 20
+  fail_closed: true
+
+data:
+  closed_candles_only: true
+  model_costs: true              # spread, slippage, commission
+
+news:
+  provider: finnhub
+
+agent:
+  timeframe: null                # AI commits this in Phase 1, then FROZEN
+  instrument: null               # AI commits this in Phase 1, then FROZEN

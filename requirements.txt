@@ -1,0 +1,20 @@
+# Core
+anthropic
+pandas
+numpy
+scipy            # stats: Deflated Sharpe, significance tests
+pyyaml
+python-dotenv
+requests
+
+# Data / news
+finnhub-python
+
+# Storage
+supabase
+
+# Reporting / tests
+matplotlib
+pytest
+
+# Add as needed during the build (e.g. a backtesting lib, pyarrow for parquet).
